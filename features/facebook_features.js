@@ -3,18 +3,15 @@
  * Licensed under the MIT License.
  */
 
-module.exports = function(controller) {
-
-    /**
+module.exports = function (controller) {
+  /**
      * Detect when a message has a sticker attached
      */
-    controller.hears(async(message) => message.sticker_id, 'message', async(bot, message) => {
-        await bot.reply(message,'Cool sticker.');
-    });
+  controller.hears(async (message) => message.sticker_id, 'message', async (bot, message) => {
+    await bot.reply(message, 'Cool sticker.')
+  })
 
-    controller.on('facebook_postback', async(bot, message) => {
-        await bot.reply(message, 'Hello there, how are you? Lets go chatting <(^v^)>');
-    });
-
-    
+  controller.on('facebook_postback', async (bot, message) => {
+    await bot.reply(message, 'Hello there, how are you? Lets go chatting <(^v^)>')
+  })
 }
