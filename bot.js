@@ -75,7 +75,6 @@ controller.ready(() => {
 
 });
 
-require('./modules/greetings');
 
 controller.webserver.get('/', (req, res) => {
 
