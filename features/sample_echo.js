@@ -7,7 +7,7 @@ module.exports = function(controller) {
 
     controller.hears('sample','message,direct_message', async(bot, message) => {
         let attachment = {
-            "messaging_type":"RESPONSE",
+            /*"messaging_type":"RESPONSE",
             "text": "Main menu",
             "quick_replies":[
                 {
@@ -30,9 +30,30 @@ module.exports = function(controller) {
                   "title":"Invite a friend",
                   "payload":"INVITE_FRIEND_PAYLOAD"
                 }    
+            ],*/
+            "setting-type":"call_to_actions",
+            "thread_state":"new_thread",
+            "messaging_type":"RESPONSE",
+            "text": "Main menu",
+            "persistent_menu": [
+                {
+                    "locale": "default",
+                    "call_to_actions": [
+                        {
+                            "type": "postback",
+                            "title": "Main menu",
+                            "payload": "MAIN_MENU_PAYLOAD"
+                        },
+                        {
+                            "type": "postback",
+                            "title": "Product catalog",
+                            "payload": "PRODUCT_CATALOG_PAYLOAD"
+                        }
+                    ]
+                }
             ]
         };
-        
+
         await bot.reply(message, attachment);
     });
 
