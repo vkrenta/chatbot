@@ -13,8 +13,8 @@ module.exports = function(controller) {
     });
 
     controller.on('facebook_postback', async(bot, message) => {
-        await bot.reply(message,`I heard you posting back a post_back about ${ message.text }`);
+        await bot.reply(message, 'Hello there, how are you? Lets go chatting <(^v^)>');
     });
 
-
+    
 }
