@@ -13,27 +13,26 @@ module.exports = function(controller) {
                 {
                   "content_type":"text",
                   "title":"My purchases",
-                  "payload":"MY_PURCHASES_PAYLOAD",
-                  "image_url":"http://example.com/img/red.png"
-                },{
+                  "payload":"MY_PURCHASES_PAYLOAD"
+                },
+                {
                   "content_type":"text",
                   "title":"Shop",
-                  "payload":"SHOP_PAYLOAD",
-                  "image_url":"http://example.com/img/green.png"
-                },{
+                  "payload":"SHOP_PAYLOAD"
+                },
+                {
                   "content_type":"text",
                   "title":"Favourites",
-                  "payload":"FAVOURITES_PAYLOAD",
-                  "image_url":"http://example.com/img/blue.png"
-                },{
+                  "payload":"FAVOURITES_PAYLOAD"
+                },
+                {
                   "content_type":"text",
                   "title":"Invite a friend",
-                  "payload":"INVITE_FRIEND_PAYLOAD",
-                  "image_url":"http://example.com/img/yellow.png"
+                  "payload":"INVITE_FRIEND_PAYLOAD"
                 }    
             ]
         };
-    
+        
         await bot.reply(message, attachment);
     });
 
@@ -42,7 +41,6 @@ module.exports = function(controller) {
         if (message.payload == 'chocolate') {
             await bot.reply(message, 'You ate the chocolate cookie!')
         }
-    
     });
 
 }
