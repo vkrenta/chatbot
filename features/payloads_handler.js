@@ -29,11 +29,8 @@ module.exports = function (controller) {
     ]
   }
 
-  
   controller.on('facebook_postback', async (bot, message) => {
-  /*
-   * When user presses Get Started, it can see Hello message and main menu
-   */
+  //When user presses Get Started, it can see Hello message and main menu
     if (message.text === 'POSTBACK_PAYLOAD') {
       const go = () => {
         bot.reply(message, 'Hello there, how are you? Lets go chatting <(^v^)>')
@@ -41,10 +38,9 @@ module.exports = function (controller) {
       }
       await go()
     }
-    
-  /*
-   * When user selects Main menu in Persistent menu
-   */
+
+  
+  //When user selects Main menu in Persistent menu
     if (message.text === 'MAIN_MENU_PAYLOAD') {
       await bot.reply(message, attachment)
     }
