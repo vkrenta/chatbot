@@ -1,29 +1,21 @@
 // Import best buy
 const bby = require('bestbuy')('TGp7jkZIbKOzfRTDzkofjo2O')
 
-function getListOfCategories(){
-  let listOfCat = [];
-  const a = bby.categories('',{show:'id,name'})
-  .then(function(data){
-    let categories = data.categories;
-    categories.forEach(element => {
-      listOfCat.push(element.name)
-    });
-    console.log(listOfCat);
-  })
-  
+async function getListOfCategories () {
+  const listOfCategories = await bby.categories('', { show: 'id,name' })
+    .then(function (data) {
+      const list = []
+      const categories = data.categories
+      categories.forEach(element => {
+        list.push(element.name)
+      })
+      return list
+    })
+  return listOfCategories
 }
 
-function getProductsByCategory(category){
-  bby.products('categoryPath.name="' + category + '"',{show:'sku,name,salePrice'})
-  .then(function(data){
-    console.log(data);
-  });
-}
+getListOfCategories().then((items) => {
+  console.log(items)
+})
 
-//getListOfCategories()
-getProductsByCategory('Blu-ray & DVD Players')
-
-
-
-
+module.exports.getListOfCategories = getListOfCategories
