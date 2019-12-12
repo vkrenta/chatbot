@@ -1,5 +1,5 @@
 // Import best buy
-const bby = require('bestbuy')('TGp7jkZIbKOzfRTDzkofjo2O')
+const bby = require('bestbuy')(process.env.BEST_BUY_API_KEY)
 
 async function getListOfCategories () {
   const listOfCategories = await bby.categories('', { show: 'id,name' })
@@ -13,9 +13,5 @@ async function getListOfCategories () {
     })
   return listOfCategories
 }
-
-getListOfCategories().then((items) => {
-  console.log(items)
-})
 
 module.exports.getListOfCategories = getListOfCategories
