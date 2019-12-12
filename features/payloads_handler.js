@@ -28,8 +28,8 @@ module.exports = function (controller) {
 
   controller.on('facebook_postback', async (bot, message) => {
     if (message.text === 'POSTBACK_PAYLOAD') {
-      bot.reply(message, attachment)
-      await bot.reply(message, 'Hello there, how are you? Lets go chatting <(^v^)>')
+      bot.reply(message, 'Hello there, how are you? Lets go chatting <(^v^)>')
+      await bot.reply(message, attachment)
     }
 
     if (message.text === 'MAIN_MENU_PAYLOAD') {
