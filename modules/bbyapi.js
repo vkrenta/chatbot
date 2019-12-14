@@ -1,4 +1,5 @@
-// Import best buy
+// Import best buy and env vars
+require('dotenv').config()
 const bby = require('bestbuy')(process.env.BEST_BUY_API_KEY)
 
 async function getListOfCategories () {
@@ -7,11 +8,46 @@ async function getListOfCategories () {
       const list = []
       const categories = data.categories
       categories.forEach(element => {
-        list.push(element.name)
+        list.push(element)
       })
       return list
+    })
+    .catch(() => {
+      return null
     })
   return listOfCategories
 }
 
-module.exports.getListOfCategories = getListOfCategories
+async function getProductsByCategory (id) {
+  const listOfProducts = await bby.products(`categoryPath.id=${id}`, { show: 'sku,name' })
+    .then((data) => {
+      const list = []
+      const products = data.products
+      products.forEach(element => {
+        list.push(element)
+      })
+      return list
+    })
+    .catch(() => {
+      return null
+    })
+  return listOfProducts
+}
+
+async function getProductBySku (sku) {
+  const product = await bby.products(`sku=${sku}`, { show: 'sku,name,image,salePrice' })
+    .then(data => {
+      const item = data.products[0]
+      return item
+    })
+    .catch(() => {
+      return null
+    })
+  return product
+}
+
+module.exports = {
+  getListOfCategories: getListOfCategories,
+  getProductsByCategory: getProductsByCategory,
+  getProductBySku: getProductBySku
+}
