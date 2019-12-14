@@ -18,4 +18,23 @@ async function getListOfCategories () {
   return listOfCategories
 }
 
-module.exports.getListOfCategories = getListOfCategories
+async function getProductsByCategory (id) {
+  const listOfProducts = await bby.products(`categoryPath.id=${id}`, { show: 'sku,name' })
+    .then((data) => {
+      const list = []
+      const products = data.products
+      products.forEach(element => {
+        list.push(element)
+      })
+      return list
+    })
+    .catch(() => {
+      return null
+    })
+  return listOfProducts
+}
+
+module.exports = {
+  getListOfCategories: getListOfCategories,
+  getProductsByCategory: getProductsByCategory
+}

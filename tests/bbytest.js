@@ -8,9 +8,21 @@ describe('Testing BestBuy API: ', () => {
     bby.getListOfCategories()
       .then((data) => {
         console.log(data)
-        expect(data !== null || data.length).to.be.true
+        expect(data !== null).to.be.true
       })
       .catch((err) => {
+        console.warn(err)
+        expect(false).to.be.true
+      })
+  })
+
+  it('Get products by category id: ', () => {
+    bby.getProductsByCategory('abcat0102000')
+      .then(data => {
+        console.log(data)
+        expect(data !== null).to.be.true
+      })
+      .catch(err => {
         console.warn(err)
         expect(false).to.be.true
       })
