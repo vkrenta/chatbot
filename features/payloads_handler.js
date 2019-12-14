@@ -51,16 +51,14 @@ module.exports = function (controller) {
       }
       await bby.getListOfCategories()
         .then((list) => {
-          let i = 0
           list.forEach(element => {
             catalogue.quick_replies.push(
               {
                 content_type: 'text',
-                title: element,
-                payload: 'CATEGORY_' + i
+                title: element.name,
+                payload: `CATEGORY_${element.id}`
               }
             )
-            i++
           })
         })
         .then(() => {
