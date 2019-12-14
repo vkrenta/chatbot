@@ -34,7 +34,20 @@ async function getProductsByCategory (id) {
   return listOfProducts
 }
 
+async function getProductBySku (sku) {
+  const product = await bby.products(`sku=${sku}`, { show: 'sku,name,image,salePrice' })
+    .then(data => {
+      const item = data.products[0]
+      return item
+    })
+    .catch(() => {
+      return null
+    })
+  return product
+}
+
 module.exports = {
   getListOfCategories: getListOfCategories,
-  getProductsByCategory: getProductsByCategory
+  getProductsByCategory: getProductsByCategory,
+  getProductBySku: getProductBySku
 }
