@@ -37,6 +37,9 @@ module.exports = function (controller) {
         .then(() => {
           bot.reply(message, attachment)
         })
+        .catch(reason => {
+          console.warn(reason)
+        })
     }
     // When user selects Main menu in Persistent menu
     if (message.text === 'MAIN_MENU_PAYLOAD') {
@@ -63,6 +66,9 @@ module.exports = function (controller) {
         })
         .then(() => {
           bot.reply(message, catalogue)
+        })
+        .catch(reason => {
+          console.warn(reason)
         })
     }
   })
