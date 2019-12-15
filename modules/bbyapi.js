@@ -2,8 +2,32 @@
 require('dotenv').config()
 const bby = require('bestbuy')(process.env.BEST_BUY_API_KEY)
 
+async function getTotalProducts () {
+  const totalOfProd = await bby.categories('', { show: '', pageSize: 1 })
+    .then(data => {
+      const total = data.total
+      return total
+    })
+    .catch(() => {
+      return null
+    })
+  return totalOfProd
+}
+
+async function getTotalCategories () {
+  const totalOfCat = await bby.categories('', { show: '', pageSize: 1 })
+    .then(data => {
+      const total = data.total
+      return total
+    })
+    .catch(() => {
+      return null
+    })
+  return totalOfCat
+}
+
 async function getListOfCategories () {
-  const listOfCategories = await bby.categories('', { show: 'id,name' })
+  const listOfCategories = await bby.categories('', { show: 'id,name', page: 1, pageSize: 10 })
     .then(function (data) {
       const list = []
       const categories = data.categories
@@ -49,5 +73,7 @@ async function getProductBySku (sku) {
 module.exports = {
   getListOfCategories: getListOfCategories,
   getProductsByCategory: getProductsByCategory,
-  getProductBySku: getProductBySku
+  getProductBySku: getProductBySku,
+  getTotalCategories: getTotalCategories,
+  getTotalProducts: getTotalProducts
 }
