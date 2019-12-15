@@ -1,0 +1,26 @@
+{
+  "messaging_type": "RESPONSE",
+  "text": "Select something",
+  "quick_replies": [
+    {
+      "content_type": "text",
+      "title": "My purchases",
+      "payload": "MY_PURCHASES_PAYLOAD"
+    },
+    {
+      "content_type": "text",
+      "title": "Shop",
+      "payload": "SHOP_PAYLOAD"
+    },
+    {
+      "content_type": "text",
+      "title": "Favourites",
+      "payload": "FAVOURITES_PAYLOAD"
+    },
+    {
+      "content_type": "text",
+      "title": "Invite a friend",
+      "payload": "INVITE_FRIEND_PAYLOAD"
+    }
+  ]
+}

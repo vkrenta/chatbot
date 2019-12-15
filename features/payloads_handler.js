@@ -3,32 +3,7 @@ module.exports = function (controller) {
   /*
    * Main menu buttons
    */
-  const attachment = {
-    messaging_type: 'RESPONSE',
-    text: 'Select something',
-    quick_replies: [
-      {
-        content_type: 'text',
-        title: 'My purchases',
-        payload: 'MY_PURCHASES_PAYLOAD'
-      },
-      {
-        content_type: 'text',
-        title: 'Shop',
-        payload: 'SHOP_PAYLOAD'
-      },
-      {
-        content_type: 'text',
-        title: 'Favourites',
-        payload: 'FAVOURITES_PAYLOAD'
-      },
-      {
-        content_type: 'text',
-        title: 'Invite a friend',
-        payload: 'INVITE_FRIEND_PAYLOAD'
-      }
-    ]
-  }
+  const attachment = require('../attachments/main_menu.json')
 
   controller.on('facebook_postback', async (bot, message) => {
   // When user presses Get Started, it can see Hello message and main menu
