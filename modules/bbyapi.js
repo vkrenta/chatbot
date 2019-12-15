@@ -2,8 +2,8 @@
 require('dotenv').config()
 const bby = require('bestbuy')(process.env.BEST_BUY_API_KEY)
 
-async function getTotalProducts () {
-  const totalOfProd = await bby.categories('', { show: '', pageSize: 1 })
+async function getTotalProducts (categoryPathID) {
+  const totalOfProd = await bby.products(`categoryPath.id=${categoryPathID}`, { show: '', pageSize: 1 })
     .then(data => {
       const total = data.total
       return total
@@ -26,8 +26,8 @@ async function getTotalCategories () {
   return totalOfCat
 }
 
-async function getListOfCategories () {
-  const listOfCategories = await bby.categories('', { show: 'id,name', page: 1, pageSize: 10 })
+async function getListOfCategories (page, pageSize) {
+  const listOfCategories = await bby.categories('', { show: 'id,name', page: page, pageSize: pageSize })
     .then(function (data) {
       const list = []
       const categories = data.categories
@@ -42,8 +42,9 @@ async function getListOfCategories () {
   return listOfCategories
 }
 
-async function getProductsByCategory (id) {
-  const listOfProducts = await bby.products(`categoryPath.id=${id}`, { show: 'sku,name' })
+async function getProductsByCategory (id, page, pageSize) {
+  const listOfProducts = await bby.products(`categoryPath.id=${id}`,
+    { show: 'sku,name', page: page, pageSize: pageSize })
     .then((data) => {
       const list = []
       const products = data.products

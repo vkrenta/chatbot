@@ -4,8 +4,8 @@ const { expect } = require('chai')
 const bby = require('../modules/bbyapi')
 
 describe('Testing BestBuy API: ', () => {
-  it('Get total products ', async () => {
-    await bby.getTotalProducts()
+  it('Get total products by category', async () => {
+    await bby.getTotalProducts('abcat0102000')
       .then((data) => {
         console.log(`Total products : ${data}`)
         expect(data !== null).to.be.true
@@ -29,9 +29,9 @@ describe('Testing BestBuy API: ', () => {
   })
 
   it('Get list of all categories: ', async () => {
-    await bby.getListOfCategories()
+    await bby.getListOfCategories(1, 10)
       .then((data) => {
-        console.log('First 10 categories: ')
+        console.log('Categories: ')
         console.log(data)
         expect(data !== null).to.be.true
       })
@@ -42,9 +42,9 @@ describe('Testing BestBuy API: ', () => {
   })
 
   it('Get products by category id: ', async () => {
-    await bby.getProductsByCategory('abcat0102000')
+    await bby.getProductsByCategory('abcat0102000', 10, 10)
       .then(data => {
-        console.log('First 10 products: ')
+        console.log('Products: ')
         console.log(data)
         expect(data !== null).to.be.true
       })

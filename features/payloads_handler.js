@@ -52,7 +52,7 @@ module.exports = function (controller) {
         text: 'Select category',
         quick_replies: []
       }
-      await bby.getListOfCategories()
+      await bby.getListOfCategories(1, 10)
         .then((list) => {
           list.forEach(element => {
             catalogue.quick_replies.push(
