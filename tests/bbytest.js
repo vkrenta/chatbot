@@ -42,7 +42,7 @@ describe('Testing BestBuy API: ', () => {
   })
 
   it('Get products by category id: ', async () => {
-    await bby.getProductsByCategory('abcat0102000', 10, 10)
+    await bby.getProductsByCategory('abcat0102000', 1, 4)
       .then(data => {
         console.log('Products: ')
         console.log(data)

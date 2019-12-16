@@ -44,7 +44,7 @@ async function getListOfCategories (page, pageSize) {
 
 async function getProductsByCategory (id, page, pageSize) {
   const listOfProducts = await bby.products(`categoryPath.id=${id}`,
-    { show: 'sku,name', page: page, pageSize: pageSize })
+    { show: 'sku,name,image,salePrice', page: page, pageSize: pageSize })
     .then((data) => {
       const list = []
       const products = data.products

@@ -24,9 +24,6 @@ module.exports = (controller) => {
         .then(() => {
           bot.reply(message, catalogue)
         })
-        .catch(reason => {
-          console.warn(reason)
-        })
     }
   })
 }
