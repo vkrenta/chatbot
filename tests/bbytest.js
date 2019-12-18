@@ -10,10 +10,6 @@ describe('Testing BestBuy API: ', () => {
         console.log(`Total products : ${data}`)
         expect(data !== null).to.be.true
       })
-      .catch((err) => {
-        console.warn(err)
-        expect(false).to.be.true
-      })
   })
 
   it('Get total categories ', async () => {
@@ -21,10 +17,6 @@ describe('Testing BestBuy API: ', () => {
       .then((data) => {
         console.log(`Total categories : ${data}`)
         expect(data !== null).to.be.true
-      })
-      .catch((err) => {
-        console.warn(err)
-        expect(false).to.be.true
       })
   })
 
@@ -35,10 +27,6 @@ describe('Testing BestBuy API: ', () => {
         console.log(data)
         expect(data !== null).to.be.true
       })
-      .catch((err) => {
-        console.warn(err)
-        expect(false).to.be.true
-      })
   })
 
   it('Get products by category id: ', async () => {
@@ -48,10 +36,6 @@ describe('Testing BestBuy API: ', () => {
         console.log(data)
         expect(data !== null).to.be.true
       })
-      .catch(err => {
-        console.warn(err)
-        expect(false).to.be.true
-      })
   })
 
   it('Get product by sku: ', async () => {
@@ -60,10 +44,6 @@ describe('Testing BestBuy API: ', () => {
         console.log('Product with sku 4743301: ')
         console.log(data)
         expect(data !== null).to.be.true
-      })
-      .catch(err => {
-        console.warn(err)
-        expect(false).to.be.true
       })
   })
 })
