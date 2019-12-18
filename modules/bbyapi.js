@@ -60,7 +60,8 @@ async function getProductsByCategory (id, page, pageSize) {
 }
 
 async function getProductBySku (sku) {
-  const product = await bby.products(`sku=${sku}`, { show: 'sku,name,image,salePrice' })
+  const product = await bby.products(`sku=${sku}`,
+    { show: 'sku,name,image,manufacturer,shortDescription,warrantyLabor,salePrice' })
     .then(data => {
       const item = data.products[0]
       return item
