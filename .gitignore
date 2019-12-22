@@ -2,3 +2,4 @@
 node_modules/
 .curl
 .nyc_output/
+.vs/
