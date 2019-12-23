@@ -18,6 +18,7 @@ const { MongoDbStorage } = require('botbuilder-storage-mongodb')
 require('dotenv').config()
 
 // load bby
+// eslint-disable-next-line no-unused-vars
 let storage = null
 if (process.env.MONGO_URI) {
   // eslint-disable-next-line no-undef
@@ -44,7 +45,7 @@ const controller = new Botkit({
 
   adapter: adapter,
 
-  storage
+  storage: null
 })
 
 if (process.env.CMS_URI) {
