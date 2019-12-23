@@ -18,6 +18,7 @@ const { MongoDbStorage } = require('botbuilder-storage-mongodb')
 require('dotenv').config()
 
 // load bby
+// eslint-disable-next-line no-unused-vars
 let storage = null
 if (process.env.MONGO_URI) {
   // eslint-disable-next-line no-undef
@@ -57,7 +58,6 @@ if (process.env.CMS_URI) {
 // Once the bot has booted up its internal services, you can use them to do stuff.
 controller.ready(() => {
   // load traditional developer-created local custom feature modules
-  console.log(controller.dialogSet)
   // eslint-disable-next-line no-path-concat
   controller.loadModules(__dirname + '/features')
 
