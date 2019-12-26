@@ -1,5 +1,7 @@
 const user = require('../models/user')
 const { to } = require('await-to-js')
+const bby = require('../modules/bbyapi')
+const { forEachAsync } = require('foreachasync')
 // eslint-disable-next-line prefer-const
 let page = 1
 
@@ -13,7 +15,7 @@ module.exports = (controller) => {
     const pageCount = Math.ceil(docCount / limit)
     let answer = require('../attachments/generic_template.json')
     answer.attachment.payload.elements = []
-    answer.quick_replies = []
+    // answer.quick_replies = undefined
 
     if (message.quick_reply && message.quick_reply.payload === 'MY_PURCHASES_PAYLOAD') {
       if (!pageCount) {
@@ -25,10 +27,24 @@ module.exports = (controller) => {
 
         if (errorPag) console.log(errorPag)
 
-        console.log(results)
+        await forEachAsync(results, async element => {
+          await bby.getProductBySku(element.sku)
+            .then(data => {
+              answer.attachment.payload.elements.push({
+                title: data.name,
+                image_url: data.image,
+                subtitle: `Sale Price ${data.salePrice}\n` +
+                  `Order date ${element.date}`,
+                buttons: [{
+                  type: 'postback',
+                  title: 'Order',
+                  payload: `ORDER_${element.sku}`
+                }]
+              })
+            })
+        })
       }
-
-      // await bot.reply(message, answer)
+      await bot.reply(message, answer)
     }
   })
 }
