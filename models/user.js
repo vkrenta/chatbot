@@ -1,3 +1,4 @@
+const mongoosePaginate = require('mongoose-paginate-v2')
 const mongoose = require('../modules/mongoose')
 
 const OrderSchema = new mongoose.Schema({
@@ -23,6 +24,8 @@ const OrderSchema = new mongoose.Schema({
     default: Date.now()
   }
 })
+
+OrderSchema.plugin(mongoosePaginate)
 
 const orders = mongoose.model('orders', OrderSchema)
 

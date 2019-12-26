@@ -9,6 +9,7 @@
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
+    "await-to-js": "^2.1.1",
     "bestbuy": "^2.1.3",
     "botbuilder-adapter-facebook": "^1.0.7",
     "botbuilder-storage-mongodb": "^0.9.5",
