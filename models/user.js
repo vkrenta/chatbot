@@ -30,3 +30,18 @@ OrderSchema.plugin(mongoosePaginate)
 const orders = mongoose.model('orders', OrderSchema)
 
 module.exports.orders = orders
+
+module.exports.orders.getDocs = (convId, page, limit) => {
+  return new Promise((resolve, reject) => {
+    const query = {
+      limit: limit,
+      page: page,
+      select: 'sku date',
+      sort: { date: -1 }
+    }
+    orders.paginate({ convId: convId }, query, (err, result) => {
+      if (err) reject(err)
+      resolve(result.docs)
+    })
+  })
+}

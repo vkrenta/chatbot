@@ -1,5 +1,6 @@
 const user = require('../models/user')
 const { to } = require('await-to-js')
+// eslint-disable-next-line prefer-const
 let page = 1
 
 module.exports = (controller) => {
@@ -20,13 +21,7 @@ module.exports = (controller) => {
         answer.text = 'sorry, but there are no items!'
         console.log('No documents')
       } else if (pageCount >= 1) {
-        const query = {
-          limit: limit,
-          page: page,
-          select: 'sku date',
-          sort: { date: -1 }
-        }
-        const [errorPag, results] = await to(user.orders.paginate({ convId: convId }, query))
+        const [errorPag, results] = await to(user.orders.getDocs(convId, page, limit))
 
         if (errorPag) console.log(errorPag)
 
