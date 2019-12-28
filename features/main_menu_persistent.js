@@ -4,6 +4,7 @@ module.exports = (controller) => {
   controller.on('facebook_postback', async (bot, message) => {
     // When user selects Main menu in Persistent menu
     if (message.text === 'MAIN_MENU_PAYLOAD') {
+      attachment.text = 'Select something'
       await bot.reply(message, attachment)
     }
   })
