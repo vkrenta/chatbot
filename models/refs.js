@@ -1,19 +1,17 @@
 const mongoose = require('../modules/mongoose')
+const findOrCreate = require('mongoose-findorcreate')
 
 const ReferralSchema = new mongoose.Schema({
-  userId: {
+  creatorId: {
     type: String,
     require: true
   },
   reflink: {
     type: String,
     require: true
-  },
-  clicks: {
-    type: Number,
-    require: true
   }
 })
+ReferralSchema.plugin(findOrCreate)
 
 const refs = mongoose.model('refs', ReferralSchema)
 
