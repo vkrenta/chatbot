@@ -8,7 +8,8 @@ async function getTotalProducts (categoryPathID) {
       const total = data.total
       return total
     })
-    .catch(() => {
+    .catch(err => {
+      console.log(err)
       return null
     })
   return totalOfProd
@@ -20,7 +21,8 @@ async function getTotalCategories () {
       const total = data.total
       return total
     })
-    .catch(() => {
+    .catch(err => {
+      console.log(err)
       return null
     })
   return totalOfCat
@@ -36,7 +38,8 @@ async function getListOfCategories (page, pageSize) {
       })
       return list
     })
-    .catch(() => {
+    .catch(err => {
+      console.log(err)
       return null
     })
   return listOfCategories
@@ -53,7 +56,8 @@ async function getProductsByCategory (id, page, pageSize) {
       })
       return list
     })
-    .catch(() => {
+    .catch(err => {
+      console.log(err)
       return null
     })
   return listOfProducts
@@ -66,7 +70,8 @@ async function getProductBySku (sku) {
       const item = data.products[0]
       return item
     })
-    .catch(() => {
+    .catch(err => {
+      console.log(err)
       return null
     })
   return product
