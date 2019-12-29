@@ -1,9 +1,10 @@
 const bby = require('../modules/bbyapi')
 
 module.exports = (controller) => {
-  controller.on('facebook_postback', async (bot, message) => {
+  controller.on('message,direct_message,facebook_postback', async (bot, message) => {
     // Catalogue of items
-    if (message.text === 'GATALOGUE_PAYLOAD') {
+    if (message.text === 'GATALOGUE_PAYLOAD' ||
+      (message.quick_reply && message.quick_reply.payload === 'SHOP_PAYLOAD')) {
       const catalogue = {
         messaging_type: 'RESPONSE',
         text: 'Select category',
