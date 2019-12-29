@@ -36,18 +36,15 @@ module.exports = (controller) => {
 
     if (errorCount) console.log(errorCount)
     const pageCount = Math.ceil(docCount / limit)
-    let answer = require('../attachments/generic_template.json')
-    answer.attachment.payload.elements = []
-    answer.quick_replies = []
-
-    if (message.quick_reply && message.quick_reply.payload === 'MY_PURCHASES_PAYLOAD' &&
-      message.text === 'Next') page++
-    if (message.quick_reply && message.quick_reply.payload === 'MY_PURCHASES_PAYLOAD' &&
-      message.text === 'Previous') page--
-
-    console.log(page)
 
     if (message.quick_reply && message.quick_reply.payload === 'MY_PURCHASES_PAYLOAD') {
+      let answer = require('../attachments/generic_template.json')
+      answer.attachment.payload.elements = []
+      answer.quick_replies = []
+      if (message.text === 'Next') page++
+      if (message.text === 'Previous') page--
+      console.log(page)
+
       if (!pageCount) {
         answer = require('../attachments/main_menu.json')
         answer.text = 'sorry, but there are no items!'
