@@ -24,6 +24,11 @@ module.exports = (controller) => {
                     type: 'postback',
                     title: 'Order',
                     payload: `ORDER_${element.sku}`
+                  },
+                  {
+                    type: 'postback',
+                    title: 'To favourites',
+                    payload: `FAVOURITES_${element.sku}`
                   }
                 ]
               })
