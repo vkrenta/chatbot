@@ -9,6 +9,6 @@ const FavouritesSchema = new mongoose.Schema({
 })
 FavouritesSchema.plugin(findOrCreate)
 
-const favourites = mongoose.model('refs', FavouritesSchema)
+const favourites = mongoose.model('favourites', FavouritesSchema)
 
 module.exports = favourites
