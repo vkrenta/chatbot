@@ -2,7 +2,6 @@ const user = require('../models/user')
 const { to } = require('await-to-js')
 const bby = require('../modules/bbyapi')
 const { forEachAsync } = require('foreachasync')
-// eslint-disable-next-line prefer-const
 let page = 1
 
 async function displayPurchases (answer, convId, limit) {
@@ -28,6 +27,23 @@ async function displayPurchases (answer, convId, limit) {
   })
 }
 
+const menu = {
+  content_type: 'text',
+  title: 'Main menu',
+  payload: 'MAIN_MENU_PAYLOAD'
+}
+
+const next = {
+  content_type: 'text',
+  title: 'Next',
+  payload: 'MY_PURCHASES_PAYLOAD'
+}
+
+const prev = {
+  content_type: 'text',
+  title: 'Previous',
+  payload: 'MY_PURCHASES_PAYLOAD'
+}
 module.exports = (controller) => {
   controller.on('message,direct_message,facebook_postback', async (bot, message) => {
     const convId = message.sender.id
@@ -51,47 +67,19 @@ module.exports = (controller) => {
         console.log('No documents')
       } else if (page === 1) {
         answer.quick_replies = [
-          {
-            content_type: 'text',
-            title: 'Main menu',
-            payload: 'MAIN_MENU_PAYLOAD'
-          },
-          {
-            content_type: 'text',
-            title: 'Next',
-            payload: 'MY_PURCHASES_PAYLOAD'
-          }
+          menu,
+          next
         ]
       } else if (page > 1 && page < pageCount) {
         answer.quick_replies = [
-          {
-            content_type: 'text',
-            title: 'Previous',
-            payload: 'MY_PURCHASES_PAYLOAD'
-          },
-          {
-            content_type: 'text',
-            title: 'Main menu',
-            payload: 'MAIN_MENU_PAYLOAD'
-          },
-          {
-            content_type: 'text',
-            title: 'Next',
-            payload: 'MY_PURCHASES_PAYLOAD'
-          }
+          prev,
+          menu,
+          next
         ]
       } else { // page === pageCount
         answer.quick_replies = [
-          {
-            content_type: 'text',
-            title: 'Previous',
-            payload: 'MY_PURCHASES_PAYLOAD'
-          },
-          {
-            content_type: 'text',
-            title: 'Main menu',
-            payload: 'MAIN_MENU_PAYLOAD'
-          }
+          prev,
+          menu
         ]
       }
       await displayPurchases(answer, convId, limit)
