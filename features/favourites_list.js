@@ -12,6 +12,11 @@ module.exports = (controller) => {
     else {
       const products = require('../attachments/generic_template.json')
       products.attachment.payload.elements = []
+      products.quick_replies = [{
+        content_type: 'text',
+        title: 'Main menu',
+        payload: 'MAIN_MENU_PAYLOAD'
+      }]
       await forEachAsync(skues, async element => {
         await bby.getProductBySku(element.sku)
           .then(data => {
