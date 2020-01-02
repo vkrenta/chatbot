@@ -18,23 +18,21 @@ module.exports = (controller) => {
         payload: 'MAIN_MENU_PAYLOAD'
       }]
       await forEachAsync(skues, async element => {
-        await bby.getProductBySku(element.sku)
-          .then(data => {
-            products.attachment.payload.elements.push({
-              title: data.name,
-              image_url: data.image,
-              subtitle: `Price $${data.salePrice}`,
-              buttons: [
-                {
-                  type: 'postback',
-                  title: 'Order',
-                  payload: `ORDER_${data.sku}`
-                }
-              ]
-            })
-          })
+        const product = await bby.getProductBySku(element.sku)
+        await products.attachment.payload.elements.push({
+          title: product.name,
+          image_url: product.image,
+          subtitle: `Price $${product.salePrice}`,
+          buttons: [
+            {
+              type: 'postback',
+              title: 'Order',
+              payload: `ORDER_${product.sku}`
+            }
+          ]
+        })
       })
-        .then(() => bot.reply(message, products))
+      await bot.reply(message, products)
     }
   })
 }
