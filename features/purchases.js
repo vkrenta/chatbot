@@ -1,11 +1,11 @@
-const user = require('../models/user')
+const orders = require('../models/orders')
 const { to } = require('await-to-js')
 const bby = require('../modules/bbyapi')
 const { forEachAsync } = require('foreachasync')
 let page = 1
 
 async function displayPurchases (answer, convId, limit) {
-  const [errorPag, results] = await to(user.orders.getDocs(convId, page, limit))
+  const [errorPag, results] = await to(orders.getDocs(convId, page, limit))
 
   if (errorPag) console.log(errorPag)
 
@@ -48,7 +48,7 @@ module.exports = (controller) => {
   controller.on('message,direct_message,facebook_postback', async (bot, message) => {
     const convId = message.sender.id
     const limit = 2
-    const [errorCount, docCount] = await to(user.orders.countDocuments({ convId: message.sender.id }))
+    const [errorCount, docCount] = await to(orders.countDocuments({ convId: message.sender.id }))
 
     if (errorCount) console.log(errorCount)
     const pageCount = Math.ceil(docCount / limit)
