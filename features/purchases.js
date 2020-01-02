@@ -10,23 +10,22 @@ async function displayPurchases (answer, convId, limit) {
   if (errorPag) console.log(errorPag)
 
   await forEachAsync(results, async element => {
-    await bby.getProductBySku(element.sku)
-      .then(data => {
-        answer.attachment.payload.elements.push({
-          title: data.name,
-          image_url: data.image,
-          subtitle: `Sale Price ${data.salePrice}\n` +
+    const data = await bby.getProductBySku(element.sku)
+    answer.attachment.payload.elements.push({
+      title: data.name,
+      image_url: data.image,
+      subtitle: `Sale Price ${data.salePrice}\n` +
             `Order date ${element.date}`,
-          buttons: [{
-            type: 'postback',
-            title: 'Repeat',
-            payload: `ORDER_${element.sku}`
-          }]
-        })
-      })
+      buttons: [{
+        type: 'postback',
+        title: 'Repeat',
+        payload: `ORDER_${element.sku}`
+      }]
+    })
   })
 }
 
+// navigation buttons
 const menu = {
   content_type: 'text',
   title: 'Main menu',
@@ -59,12 +58,13 @@ module.exports = (controller) => {
       answer.quick_replies = []
       if (message.text === 'Next') page++
       if (message.text === 'Previous') page--
-      console.log(page)
 
       if (!pageCount) {
         answer = require('../attachments/main_menu.json')
         answer.text = 'sorry, but there are no items!'
         console.log('No documents')
+      } else if (pageCount === 1) {
+        answer.quick_replies = [menu]
       } else if (page === 1) {
         answer.quick_replies = [
           menu,
