@@ -10,21 +10,17 @@ module.exports = (controller) => {
         text: 'Select category',
         quick_replies: []
       }
-      await bby.getListOfCategories(1, 10)
-        .then((list) => {
-          list.forEach(element => {
-            catalogue.quick_replies.push(
-              {
-                content_type: 'text',
-                title: element.name,
-                payload: `CATEGORY_${element.id}`
-              }
-            )
-          })
-        })
-        .then(() => {
-          bot.reply(message, catalogue)
-        })
+      const categories = await bby.getListOfCategories(1, 10)
+      categories.forEach(element => {
+        catalogue.quick_replies.push(
+          {
+            content_type: 'text',
+            title: element.name,
+            payload: `CATEGORY_${element.id}`
+          }
+        )
+      })
+      await bot.reply(message, catalogue)
     }
   })
 }
