@@ -1,7 +1,7 @@
 const bby = require('../modules/bbyapi')
 
 module.exports = (controller) => {
-  controller.hears('ORDER_(.*)', 'facebook_postback',  (bot, message) => {
+  controller.hears('ORDER_(.*)', 'facebook_postback', (bot, message) => {
     const sku = message.postback.payload.split('_')[1]
     const template = require('../attachments/generic_template.json')
     template.attachment.payload.elements = []
