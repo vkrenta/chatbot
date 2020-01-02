@@ -29,9 +29,9 @@ OrderSchema.plugin(mongoosePaginate)
 
 const orders = mongoose.model('orders', OrderSchema)
 
-module.exports.orders = orders
+module.exports = orders
 
-module.exports.orders.getDocs = (convId, page, limit) => {
+module.exports.getDocs = (convId, page, limit) => {
   return new Promise((resolve, reject) => {
     const query = {
       limit: limit,
