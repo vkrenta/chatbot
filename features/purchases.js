@@ -10,7 +10,9 @@ async function displayPurchases (answer, convId, limit) {
   if (errorPag) console.log(errorPag)
 
   await forEachAsync(results, async element => {
-    const data = await bby.getProductBySku(element.sku)
+    const [error, data] = await to(bby.getProductBySku(element.sku))
+    if (error) console.log(error.status, error.statusText)
+
     answer.attachment.payload.elements.push({
       title: data.name,
       image_url: data.image,

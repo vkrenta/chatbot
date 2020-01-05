@@ -28,5 +28,6 @@ module.exports = (controller) => {
         })
       })
       .then(() => bot.reply(message, template))
+      .catch(err => console.log(err.status, err.statusText))
   })
 }

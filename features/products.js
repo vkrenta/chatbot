@@ -1,4 +1,5 @@
 const bby = require('../modules/bbyapi')
+const { to } = require('await-to-js')
 
 module.exports = (controller) => {
   controller.on('message,direct_message,facebook_postback', async (bot, message) => {
@@ -9,7 +10,9 @@ module.exports = (controller) => {
       const products = require('../attachments/generic_template.json')
       products.attachment.payload.elements = []
       // Adding elements to template
-      const data = await bby.getProductsByCategory(category, 1, 4)
+      const [error, data] = await to(bby.getProductsByCategory(category, 1, 4))
+      if (error) console.log(error.status, error.statusText)
+
       data.forEach(element => {
         products.attachment.payload.elements.push({
           title: element.name,
