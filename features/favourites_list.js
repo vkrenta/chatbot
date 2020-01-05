@@ -17,22 +17,25 @@ module.exports = (controller) => {
         title: 'Main menu',
         payload: 'MAIN_MENU_PAYLOAD'
       }]
+      let breakIterator = 0
       await forEachAsync(skues, async element => {
         const [error, product] = await to(bby.getProductBySku(element.sku))
         if (error) console.log(error.status, error.statusText)
-
-        await products.attachment.payload.elements.push({
-          title: product.name,
-          image_url: product.image,
-          subtitle: `Price $${product.salePrice}`,
-          buttons: [
-            {
-              type: 'postback',
-              title: 'Order',
-              payload: `ORDER_${product.sku}`
-            }
-          ]
-        })
+        breakIterator++
+        if (breakIterator <= 10) {
+          await products.attachment.payload.elements.push({
+            title: product.name,
+            image_url: product.image,
+            subtitle: `Price $${product.salePrice}`,
+            buttons: [
+              {
+                type: 'postback',
+                title: 'Order',
+                payload: `ORDER_${product.sku}`
+              }
+            ]
+          })
+        }
       })
       await bot.reply(message, products)
     }
