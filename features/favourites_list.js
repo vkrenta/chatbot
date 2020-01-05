@@ -18,7 +18,9 @@ module.exports = (controller) => {
         payload: 'MAIN_MENU_PAYLOAD'
       }]
       await forEachAsync(skues, async element => {
-        const product = await bby.getProductBySku(element.sku)
+        const [error, product] = await to(bby.getProductBySku(element.sku))
+        if (error) console.log(error.status, error.statusText)
+
         await products.attachment.payload.elements.push({
           title: product.name,
           image_url: product.image,

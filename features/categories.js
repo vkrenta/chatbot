@@ -1,4 +1,5 @@
 const bby = require('../modules/bbyapi')
+const { to } = require('await-to-js')
 
 module.exports = (controller) => {
   controller.on('message,direct_message,facebook_postback', async (bot, message) => {
@@ -10,7 +11,8 @@ module.exports = (controller) => {
         text: 'Select category',
         quick_replies: []
       }
-      const categories = await bby.getListOfCategories(1, 10)
+      const [error, categories] = await to(bby.getListOfCategories(1, 10))
+      if (error) console.log(error.status, error.statusText)
       categories.forEach(element => {
         catalogue.quick_replies.push(
           {
